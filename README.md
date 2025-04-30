@@ -21,14 +21,14 @@ If you want to use ZeroCrumb as a library, You will need to compile a DLL that e
 You can run this in any directory of your choice as long as the key dumper is in the same directory.
 ```
 ZeroCrumb.exe <BROWSER_TYPE>
-
+```
+```
 0 -> Chrome
 1 -> Brave
 2 -> Edge
 ```
 
 ## Example
-
 ```
 $ ZeroCrumb.exe 0
 [*] Reading From Pipe...
