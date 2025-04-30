@@ -23,6 +23,7 @@ You can run this in any directory of your choice as long as the key dumper is in
 ZeroCrumb.exe <BROWSER_TYPE>
 ```
 ```
+Browser Types:
 0 -> Chrome
 1 -> Brave
 2 -> Edge
