@@ -41,7 +41,7 @@ This is by no means the most stealthy implementation of this bypass, It can get 
 
 By the time I'm testing this, It got past Windows Defender but I haven't checked other AVs.
 
-I'll leave making the bypass stealthier as an exercise for the user if this bypass gets signatured in the future.
+I'll leave making the bypass stealthier as an exercise for the user if this bypass implementation gets signatured in the future.
 
 ## Credits
 [Transacted Hollowing](https://github.com/hasherezade/transacted_hollowing/) by [hasherezade](https://github.com/hasherezade/).
