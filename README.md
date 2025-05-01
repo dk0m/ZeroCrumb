@@ -38,7 +38,9 @@ App Bound Key: 980f8ea8af3299d966a26242.....
 
 ## Disclaimer
 This is by no means the most stealthy implementation of this bypass, It can get detected by checking for specific strings, hooking APIs, etc.
+
 By the time I'm testing this, It got past Windows Defender but I haven't checked other AVs.
+
 I'll leave making the bypass stealthier as an exercise for the user if this bypass gets signatured in the future.
 
 ## Credits
