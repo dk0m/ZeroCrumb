@@ -104,10 +104,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>ntdll.lib;ktmw32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -118,6 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,12 +132,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\comm\comm.cpp" />
+    <ClCompile Include="src\dbg\dbg.cpp" />
     <ClCompile Include="src\hollowing\hollowing.cpp" />
     <ClCompile Include="ZeroCrumb.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\comm\comm.h" />
     <ClInclude Include="src\config\config.h" />
+    <ClInclude Include="src\dbg\dbg.h" />
     <ClInclude Include="src\hollowing\hollowing.h" />
     <ClInclude Include="src\hollowing\ntapi.h" />
   </ItemGroup>

