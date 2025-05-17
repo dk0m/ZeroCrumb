@@ -36,6 +36,9 @@ $ ZeroCrumb.exe 0
 App Bound Key: 980f8ea8af3299d966a26242.....
 ```
 
+## Issues
+- Debug build doesn't output the correct key
+
 ## Disclaimer
 This is by no means the most stealthy implementation of this bypass, It can get detected by checking for specific strings, hooking APIs, etc.
 
