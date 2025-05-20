@@ -70,6 +70,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnableManifest>true</VcpkgEnableManifest>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -133,15 +136,25 @@
   <ItemGroup>
     <ClCompile Include="src\comm\comm.cpp" />
     <ClCompile Include="src\dbg\dbg.cpp" />
+    <ClCompile Include="src\decryptor\content\content.cpp" />
+    <ClCompile Include="src\decryptor\decrypt\decrypt.cpp" />
     <ClCompile Include="src\hollowing\hollowing.cpp" />
+    <ClCompile Include="src\utils\utils.cpp" />
     <ClCompile Include="ZeroCrumb.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\comm\comm.h" />
     <ClInclude Include="src\config\config.h" />
     <ClInclude Include="src\dbg\dbg.h" />
+    <ClInclude Include="src\decryptor\content\content.h" />
+    <ClInclude Include="src\decryptor\decrypt\decrypt.h" />
     <ClInclude Include="src\hollowing\hollowing.h" />
-    <ClInclude Include="src\hollowing\ntapi.h" />
+    <ClInclude Include="src\shared\ntapi.h" />
+    <ClInclude Include="src\utils\utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="vcpkg-configuration.json" />
+    <None Include="vcpkg.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -27,6 +27,15 @@
     <ClCompile Include="src\dbg\dbg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\decryptor\content\content.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\decryptor\decrypt\decrypt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\comm\comm.h">
@@ -35,14 +44,27 @@
     <ClInclude Include="src\hollowing\hollowing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\hollowing\ntapi.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\config\config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\dbg\dbg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\shared\ntapi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\decryptor\content\content.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\decryptor\decrypt\decrypt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="vcpkg.json" />
+    <None Include="vcpkg-configuration.json" />
   </ItemGroup>
 </Project>

