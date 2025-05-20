@@ -29,11 +29,32 @@ Browser Types:
 2 -> Edge
 ```
 
-## Example
+## Output Example
 ```
 $ ZeroCrumb.exe 0
 [*] Reading From Pipe...
 App Bound Key: 980f8ea8af3299d966a26242.....
+============
+Name: SIDCC
+Site: .google.com
+Path: /
+Cookie: AKEyXzXxD19T0KLMkrMC-eUXkrnEFi92OXq6rj1vydvmdL73olBVQGRQ4cG_hK5sqPhO1rLd1CM
+============
+Name: __Secure-1PSIDCC
+Site: .google.com
+Path: /
+Cookie: AKEyXzXXC8_MNDlVbAaw512aXu-QJkl0uKNW66rhjeufotzoJhT3OPN5TuCQnfKS8l57_WGfDw
+============
+Name: __Secure-3PSIDCC
+Site: .google.com
+Path: /
+Cookie: AKEyXzVVySM4FWl9itegCN2evcSmBvGc7_iXHqkKZ6VYPKmR--_LsHx1Aflar6SU4nyJiDaFq028
+============
+Name: udid
+Site: .veepn.com
+Path: /
+Cookie: 0dd5b8bb-8c5b-47f3-87f9-1db8fa7d885f
+============
 ```
 
 ## Issues
