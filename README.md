@@ -24,9 +24,9 @@ ZeroCrumb.exe <BROWSER_TYPE>
 ```
 ```
 Browser Types:
-0 -> Chrome
-1 -> Brave
-2 -> Edge
+Chrome -> 0
+Brave -> 1
+Edge -> 2
 ```
 
 ## Code Usage
