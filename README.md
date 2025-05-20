@@ -9,7 +9,7 @@ ZeroCrumb bypasses the Chrome Elevation Service by impersonating a Chrome instan
 
 Then, The key dumper running the in the hollowed chrome instance will send the decrypted key back to ZeroCrumb via a [Named Pipe](https://learn.microsoft.com/en-us/windows/win32/ipc/named-pipes).
 
-After this, The user can decrypt cookies with the key we fetched.
+After this, ZeroCrumb decrypts the cookies for the specified browser with the key fetched earlier.
 
 ## Merits With The Named Pipe Approach
 Usage of named pipes in ZeroCrumb allows any program, As long as it can use the Windows API, To connect to the ZeroCrumb named pipe and read the App Bound Key from it. 
