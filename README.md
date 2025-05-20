@@ -30,7 +30,7 @@ Edge -> 2
 ```
 
 ## Code Usage
-ZeroCrumb provides an easy to use **CookieReader** class to use:
+ZeroCrumb provides an easy-to-use **CookieReader** class:
 ```cpp
     auto reader = new CookieReader(cookiesPath.c_str(), key);
 
