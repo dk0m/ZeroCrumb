@@ -17,6 +17,18 @@ Usage of named pipes in ZeroCrumb allows any program, As long as it can use the 
 ## Using ZeroCrumb As A Library
 If you want to use ZeroCrumb as a library, You will need to compile a DLL that exports a function that does the hollowing of chrome with the key dumper. You might also need to embed the key dumper PE in the .rsrc section of the compiled DLL and later fetch it with the application resources Windows APIs.
 
+## Usage
+You can run this in any directory of your choice as long as the key dumper is in the same directory.
+```
+ZeroCrumb.exe <BROWSER_TYPE>
+```
+```
+Browser Types:
+0 -> Chrome
+1 -> Brave
+2 -> Edge
+```
+
 ## Code Usage
 ZeroCrumb provides an easy to use **CookieReader** class to use:
 ```cpp
@@ -34,16 +46,12 @@ ZeroCrumb provides an easy to use **CookieReader** class to use:
         // dump to file, send back to C2, etc...
     }
 ```
-## Usage
-You can run this in any directory of your choice as long as the key dumper is in the same directory.
+
+## Depedencies
+ZeroCrumb requires two [Vcpkg](https://vcpkg.io/) dependencies:
 ```
-ZeroCrumb.exe <BROWSER_TYPE>
-```
-```
-Browser Types:
-0 -> Chrome
-1 -> Brave
-2 -> Edge
+sqlite3
+libsodium
 ```
 
 ## Output Example
