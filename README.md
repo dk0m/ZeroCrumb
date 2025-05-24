@@ -82,6 +82,9 @@ Cookie: 0dd5b8bb-8c5b-47f3-87f9-1db8fa7d885f
 ============
 ```
 
+## Notes
+You can modify ZeroCrumb to work with any type of credential other than cookies.
+
 ## Issues
 - Debug build doesn't output the correct key
 
