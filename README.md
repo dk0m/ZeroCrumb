@@ -65,7 +65,7 @@ ZeroCrumb provides an easy-to-use **CookieReader** & **PasswordReader** classes:
       auto site = password->site;
       auto passwordValue = password->password;
       // dump to file, send back to C2, etc...
-}
+    }
 ```
 
 ## Depedencies
