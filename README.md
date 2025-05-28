@@ -20,13 +20,17 @@ If you want to use ZeroCrumb as a library, You will need to compile a DLL that e
 ## Usage
 You can run this in any directory of your choice as long as the key dumper is in the same directory.
 ```
-ZeroCrumb.exe <BROWSER_TYPE>
+ZeroCrumb.exe <BROWSER_TYPE> <DUMP_TYPE>
 ```
 ```
 Browser Types:
 Chrome -> 0
 Brave -> 1
 Edge -> 2
+
+Dump Types:
+Cookies
+Passwords
 ```
 
 ## Code Usage
@@ -47,7 +51,9 @@ ZeroCrumb provides an easy-to-use **CookieReader** & **PasswordReader** classes:
     }
 ```
 
-```
+```cpp
+    // keep in mind passwords aren't encrypted using the app bound key (yet)
+
     auto passwordsPath = browserConfig.passwordsPath;
     auto reader = new PasswordReader(passwordsPath.c_str(), key);
 
