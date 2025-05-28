@@ -53,8 +53,6 @@ ZeroCrumb provides an easy-to-use **CookieReader** & **PasswordReader** classes:
 
 ```cpp
     // keep in mind passwords aren't encrypted using the app bound key (yet)
-
-    auto passwordsPath = browserConfig.passwordsPath;
     auto reader = new PasswordReader(passwordsPath.c_str(), key);
 
     reader->initSqliteDb();
