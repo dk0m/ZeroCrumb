@@ -19,11 +19,3 @@ void CookieReader::populateCookies() {
 		this->cookies.push_back(entry);
 	}
 }
-
-CookieReader::~CookieReader() {
-	if (this->cookies.size() > 0) {
-		for (auto& cookie : this->cookies) {
-			delete cookie;
-		}
-	}
-}

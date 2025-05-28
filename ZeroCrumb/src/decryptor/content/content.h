@@ -33,7 +33,7 @@ public:
 	PBYTE key;
 
 	ContentReader(LPCSTR filePath, PBYTE key) : filePath(filePath), key(key), database(NULL), statement(NULL) {};
-	~ContentReader();
+	virtual ~ContentReader();
 
 	BOOL isLocked();
 	BOOL initSqliteDb();
@@ -57,7 +57,6 @@ public:
 	void populateCookies();
 
 	using ContentReader::ContentReader;
-	~CookieReader();
 };
 
 class PasswordReader : public ContentReader {
@@ -66,5 +65,4 @@ public:
 	void populatePasswords();
 
 	using ContentReader::ContentReader;
-	~PasswordReader();
 };

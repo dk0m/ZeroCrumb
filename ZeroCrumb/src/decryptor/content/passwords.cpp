@@ -18,11 +18,3 @@ void PasswordReader::populatePasswords() {
 		this->passwords.push_back(entry);
 	}
 }
-
-PasswordReader::~PasswordReader() {
-	if (this->passwords.size() > 0) {
-		for (auto& password : this->passwords) {
-			delete password;
-		}
-	}
-}
