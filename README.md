@@ -1,7 +1,7 @@
 
 # ZeroCrumb
 
-Bypassing Chrome Elevation Service (Without UAC) To Dump App Bound Keys & Decrypt Cookies.
+Dumping App Bound Protected Credentials & Cookies Without Privileges.
 
 ## Explanation
 
