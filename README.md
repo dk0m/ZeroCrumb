@@ -79,7 +79,7 @@ libsodium
 
 ## Output Example
 ```
-$ ZeroCrumb.exe 0
+$ ZeroCrumb.exe 0 Cookies
 [*] Reading From Pipe...
 App Bound Key: 980f8ea8af3299d966a26242.....
 ============
@@ -106,7 +106,7 @@ Cookie: 0dd5b8bb-8c5b-47f3-87f9-1db8fa7d885f
 ```
 
 ## Notes
-You can modify ZeroCrumb to work with any type of credential other than cookies.
+You can modify ZeroCrumb to work with any type of credential other than cookies & passwords.
 
 ## Issues
 - Debug build doesn't output the correct key
